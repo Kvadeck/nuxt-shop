@@ -4,18 +4,31 @@
 
 <template>
   <header>
-    <nav class="bg-green-600 border-gray-200 px-4 lg:px-6 py-2.5 dark:bg-gray-800">
-      <div class="container flex justify-between mx-auto">
+    <nav class="bg-green-600 py-2.5">
+      <div class="container hidden sm:flex justify-between mx-auto px-4">
         <div class="flex gap-4">
-          <a href="/" class="flex items-center">
-          <span class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Продажа деревьев</span>
-        </a>
-          <a href="/cart" class="flex items-center">
+          <NuxtLink to="/" class="flex items-center">
             <span
-                class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Корзина</span>
-          </a></div>
-
-        <a href="/task" class="text-xl block py-2 pr-4 pl-3 text-white font-semibold hover:text-amber-400">Задача</a>
+                class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Деревья</span>
+          </NuxtLink>
+          <NuxtLink to="/cart" class="flex items-center">
+            <span class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Корзина</span>
+          </NuxtLink>
+        </div>
+        <NuxtLink to="/task" class="block font-semibold hover:text-amber-400 text-white text-xl">
+          Задача
+        </NuxtLink>
+      </div>
+      <div class="sm:hidden flex flex-col px-4">
+        <NuxtLink to="/" class="flex items-center">
+          <span class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Продажа деревьев</span>
+        </NuxtLink>
+        <NuxtLink to="/cart" class="flex items-center">
+          <span class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Корзина</span>
+        </NuxtLink>
+        <NuxtLink to="/task" class="block font-semibold hover:text-amber-400 text-white text-xl">
+          Задача
+        </NuxtLink>
       </div>
     </nav>
   </header>

@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  Cart page!
+  Корзина пуста!
 </template>
 
 <style scoped>
