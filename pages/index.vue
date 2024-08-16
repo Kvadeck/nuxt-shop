@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <Products/>
+  <ProductsGrid/>
 </template>
 
 <style scoped>
