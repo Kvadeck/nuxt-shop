@@ -1,49 +1,5 @@
 <script setup lang="ts">
 
-interface FilterOptions {
-  color: string[];
-  smell: string[];
-  thickness: string[];
-}
-
-interface Item {
-  id: number;
-  name: string;
-  description: string;
-  imageSrc: string;
-  imageAlt: string;
-  price: number;
-  color: string;
-  smell: string;
-  thickness: string;
-}
-
-interface FilterProps {
-  items: Item[];
-  initialFilters?: FilterOptions;
-}
-
-const props = defineProps<FilterProps>();
-
-const filters = ref<FilterOptions>({
-  color: [],
-  smell: [],
-  thickness: [],
-  ...props.initialFilters,
-});
-
-
-const filteredItems = computed(() => {
-  return props.items.filter(item => {
-    const matchesCategory = filters.value.category.length === 0 || filters.value.category.includes(item.category);
-    const matchesPrice = item.price >= filters.value.priceRange[0] && item.price <= filters.value.priceRange[1];
-    const matchesStock = !filters.value.inStock || item.inStock;
-
-    return matchesCategory && matchesPrice && matchesStock;
-  });
-});
-
-
 </script>
 
 <template>
@@ -86,7 +42,6 @@ const filteredItems = computed(() => {
       </div>
     </fieldset>
   </div>
-
 </template>
 
 <style scoped>
