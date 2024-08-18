@@ -1,5 +1,10 @@
 export default defineEventHandler((event) => {
-    return [
+    const query = getQuery(event)
+
+    const limit = query.limit
+    const page = query.page
+
+    const items = [
         {
             id: 1,
             name: 'Сосна',
@@ -82,4 +87,16 @@ export default defineEventHandler((event) => {
             thickness: '790 кг/м3'
         }
     ]
+
+    const startIndex = (page - 1) * limit;
+    const endIndex = parseInt(startIndex) + parseInt(limit);
+
+    const paginatedItems = items.slice(startIndex, endIndex);
+
+
+    return {
+        page: parseInt(page),
+        items: paginatedItems,
+        totalPages: Math.ceil(items.length / limit),
+    }
 })

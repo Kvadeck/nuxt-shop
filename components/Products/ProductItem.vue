@@ -1,15 +1,17 @@
 <script setup lang="ts">
 
-interface Props {
+interface ProductItemProps {
   id: number;
   name: string;
   color: string;
   price: number;
   imageSrc: string;
   imageAlt?: string;
+  smell: string;
+  thickness: string;
 }
 
-const props = defineProps<Props>();
+const props = defineProps<ProductItemProps>();
 
 </script>
 
@@ -28,7 +30,10 @@ const props = defineProps<Props>();
             {{ props.name }}
           </a>
         </h3>
-        <p class="mt-1 text-sm text-gray-500">{{ props.color }}</p>
+        <p class="flex-col mt-1 text-sm text-gray-500">
+          <span class="block">Цвет: {{ props.color }}</span>
+          <span class="block">Запах : {{ props.smell }}</span>
+          <span class="block">Толщина: {{ props.thickness }}</span></p>
       </div>
       <p class="text-sm font-medium text-gray-900">{{ props.price }}&nbsp;₽</p>
     </div>

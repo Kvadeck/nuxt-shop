@@ -19,7 +19,7 @@
       </div>
       <div class="sm:hidden flex flex-col px-4">
         <NuxtLink to="/" class="flex items-center">
-          <span class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Продажа деревьев</span>
+          <span class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Деревья</span>
         </NuxtLink>
         <NuxtLink to="/cart" class="flex items-center">
           <span class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Корзина</span>
