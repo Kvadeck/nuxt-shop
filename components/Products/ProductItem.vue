@@ -1,18 +1,6 @@
 <script setup lang="ts">
-
-interface ProductItemProps {
-  id: number;
-  name: string;
-  color: string;
-  price: number;
-  imageSrc: string;
-  imageAlt?: string;
-  smell: string;
-  thickness: string;
-}
-
-const props = defineProps<ProductItemProps>();
-
+import type {Product} from "~/types/product";
+const props = defineProps<Product>();
 </script>
 
 <template>
@@ -25,10 +13,10 @@ const props = defineProps<ProductItemProps>();
     <div class="mt-4 flex justify-between">
       <div>
         <h3 class="text-sm text-gray-700">
-          <a href="#">
+          <NuxtLink :to="`/products/${props.id}`">
             <span aria-hidden="true" class="absolute inset-0"/>
             {{ props.name }}
-          </a>
+          </NuxtLink>
         </h3>
         <p class="flex-col mt-1 text-sm text-gray-500">
           <span class="block">Цвет: {{ props.color }}</span>
@@ -39,7 +27,3 @@ const props = defineProps<ProductItemProps>();
     </div>
   </div>
 </template>
-
-<style scoped>
-
-</style>

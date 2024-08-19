@@ -4,11 +4,18 @@ import {ChevronDownIcon} from '@heroicons/vue/20/solid'
 
 const emits = defineEmits(['sort-by-price-desc', 'sort-by-price-asc'])
 
+const activePriceDesc = ref(false)
+const activePriceAsc = ref(false)
+
 function sortByPriceDesc() {
+  activePriceDesc.value = true;
+  activePriceAsc.value = false;
   emits('sort-by-price-desc')
 }
 
 function sortByPriceAsc() {
+  activePriceDesc.value = false;
+  activePriceAsc.value = true;
   emits('sort-by-price-asc')
 }
 
@@ -27,15 +34,15 @@ function sortByPriceAsc() {
     <MenuItems
         class="absolute bg-white focus:outline-none mt-2 origin-top-right ring-1 ring-black ring-opacity-5 rounded-md shadow-lg z-10">
       <div class="py-1">
-        <MenuItem v-slot="{ active }">
+        <MenuItem>
           <a @click="sortByPriceDesc" href="#"
-             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Цена
-            по возрастанию</a>
+             :class="[activePriceDesc ? 'bg-gray-200 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+            Цена по возрастанию</a>
         </MenuItem>
-        <MenuItem v-slot="{ active }">
+        <MenuItem>
           <a @click="sortByPriceAsc" href="#"
-             :class="[active ? 'bg-gray-100 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">Цена
-            по убыванию</a>
+             :class="[activePriceAsc ? 'bg-gray-200 text-gray-900' : 'text-gray-700', 'block px-4 py-2 text-sm']">
+            Цена по убыванию</a>
         </MenuItem>
       </div>
     </MenuItems>

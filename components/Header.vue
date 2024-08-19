@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import {useCart} from '~/composables/useCart';
+const {cartItemCount} = useCart();
+
+// const itemCount = ref(cartItemCount)
 
 </script>
 
@@ -8,13 +12,14 @@
       <div class="container hidden sm:flex justify-between mx-auto px-4">
         <NuxtLink to="/" class="flex items-center">
             <span
-                class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Деревья</span>
+                class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Зелёный Маркет</span>
         </NuxtLink>
         <NuxtLink to="/cart" class="flex items-center">
-          <span class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Корзина (0)</span>
+          <span
+              class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Корзина (0)</span>
         </NuxtLink>
         <NuxtLink to="/task" class="block font-semibold hover:text-amber-400 text-white text-xl">
-          Задача
+          Задание
         </NuxtLink>
       </div>
       <div class="sm:hidden flex flex-col px-4">
@@ -25,7 +30,7 @@
           <span class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Корзина</span>
         </NuxtLink>
         <NuxtLink to="/task" class="block font-semibold hover:text-amber-400 text-white text-xl">
-          Задача
+          Задание
         </NuxtLink>
       </div>
     </nav>

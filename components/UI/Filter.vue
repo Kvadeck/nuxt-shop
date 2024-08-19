@@ -28,7 +28,7 @@ const thicknessOptions = [
 ];
 
 const filterBtnLabel = computed<string>(() => {
-  return isShowFilters.value ? 'Скрыть' : 'Показать фильтры';
+  return isShowFilters.value ? 'Скрыть' : 'Фильтры';
 });
 
 function changeFilter(event: Event): void {
@@ -98,7 +98,3 @@ function changeFilter(event: Event): void {
     </fieldset>
   </div>
 </template>
-
-<style scoped>
-/* Add any additional styling here */
-</style>
