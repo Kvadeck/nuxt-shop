@@ -1,11 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
-  Корзина пуста!
+  <Cart/>
 </template>
-
-<style scoped>
-
-</style>

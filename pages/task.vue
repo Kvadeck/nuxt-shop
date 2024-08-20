@@ -1,7 +1,3 @@
-<script setup lang="ts">
-
-</script>
-
 <template>
   <div class="container mx-auto py-4 px-4">
     <p class="font-bold py-4">Цель задания:</p>
@@ -36,7 +32,3 @@
       товаров с использованием SQL/NoSQL решений, но все обязательно в рамках 1 проекта.</p>
   </div>
 </template>
-
-<style scoped>
-
-</style>

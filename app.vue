@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const router = useRouter()
-
 const nav = [
   {label: 'Home', to: '/'},
   {label: 'Cart', to: '/cart'},

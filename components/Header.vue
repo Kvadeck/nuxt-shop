@@ -1,8 +1,13 @@
 <script setup lang="ts">
-import {useCart} from '~/composables/useCart';
-const {cartItemCount} = useCart();
+import {useCartStore} from "@/stores/cart";
+import type {Ref} from "vue";
 
-// const itemCount = ref(cartItemCount)
+const store: Ref = ref(() => {
+})
+
+onMounted(() => {
+  store.value = useCartStore()
+})
 
 </script>
 
@@ -15,8 +20,12 @@ const {cartItemCount} = useCart();
                 class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Зелёный Маркет</span>
         </NuxtLink>
         <NuxtLink to="/cart" class="flex items-center">
-          <span
-              class="text-xl font-semibold whitespace-nowrap text-white hover:text-amber-400">Корзина (0)</span>
+          <span class="flex font-semibold hover:text-amber-400 text-white text-xl whitespace-nowrap">Корзина
+            ({{ store.cartItemsCount }})
+            <span v-if="store.cartItemsCount > 0" class="relative flex h-1.5 w-1.5">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+            </span>
+          </span>
         </NuxtLink>
         <NuxtLink to="/task" class="block font-semibold hover:text-amber-400 text-white text-xl">
           Задание
@@ -36,7 +45,3 @@ const {cartItemCount} = useCart();
     </nav>
   </header>
 </template>
-
-<style scoped>
-
-</style>

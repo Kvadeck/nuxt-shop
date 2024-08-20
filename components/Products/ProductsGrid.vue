@@ -1,21 +1,14 @@
 <script setup lang="ts">
-
 import Pagination from "~/components/UI/Pagination.vue";
 import Sort from "~/components/UI/Sort.vue";
 import ProductItem from "~/components/Products/ProductItem.vue";
-import Filter from "~/components/UI/Filter.vue";
+import Filter from "~/components/UI/Filter/Filter.vue";
 import {sortByProperty} from "~/utils";
-import type {Ref} from 'vue'
-import type {FilterOptions} from "~/types/filter";
 import {useWatchedPagination} from "~/composables/usePagination";
 import {useFilteredProducts} from "~/composables/useFilteredProducts";
 
-const filters: Ref<FilterOptions> = ref({
-  filterBy: [],
-});
-
 const {products, error, totalPages, currentPage} = useWatchedPagination()
-const {filteredProducts} = useFilteredProducts(products, filters)
+const {filteredProducts, updateFilter} = useFilteredProducts(products)
 
 function sortByPriceDesc(): void {
   products.value = sortByProperty(products.value, 'price');
@@ -23,14 +16,6 @@ function sortByPriceDesc(): void {
 
 function sortByPriceAsc(): void {
   products.value = sortByProperty(products.value, 'price').reverse();
-}
-
-function updateFilter(filter: string): void {
-  if (filters.value.filterBy.includes(filter)) {
-    filters.value.filterBy = filters.value.filterBy.filter((c) => c !== filter);
-  } else {
-    filters.value.filterBy.push(filter);
-  }
 }
 
 function changePageHandler(page: number): void {
@@ -58,7 +43,7 @@ function changePageHandler(page: number): void {
                       :name="product.name"
                       :image-src="product.imageSrc"
                       :image-alt="product.imageAlt" :smell="product.smell" :thickness="product.thickness"
-                      :description="product.description"/>
+                      :description="product.description" :quantity="0"/>
       </div>
       <div v-else-if="error">Something goes wrong: {{ error }}</div>
       <div v-else class="text-center text-2xl">No trees found!</div>

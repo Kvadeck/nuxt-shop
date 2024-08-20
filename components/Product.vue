@@ -1,12 +1,17 @@
 <script setup lang="ts">
 import {useProduct} from '~/composables/useProduct';
-import {useCart} from '~/composables/useCart';
 import type {Product} from "~/types/product";
 import type {Ref} from "vue";
+import {useCartStore} from "@/stores/cart";
+
+const store: Ref = ref(() => {})
+
+// LocalStorage used only in onMounted hook
+onMounted(() => {
+  store.value = useCartStore()
+})
 
 const {product, error} = useProduct();
-const {addToCart} = useCart();
-
 const quantity: Ref = ref(1);
 
 function addProductToCart() {
@@ -22,7 +27,7 @@ function addProductToCart() {
     quantity: quantity.value,
     thickness: product.value.thickness,
   };
-  addToCart(cartItem);
+  store.value.addToCart(cartItem)
 }
 
 </script>
