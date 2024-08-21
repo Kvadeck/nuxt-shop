@@ -21,8 +21,8 @@ onMounted(() => {
         </NuxtLink>
         <NuxtLink to="/cart" class="flex items-center">
           <span class="flex font-semibold hover:text-amber-400 text-white text-xl whitespace-nowrap">Корзина
-            ({{ store.cartItemsCount }})
-            <span v-if="store.cartItemsCount > 0" class="relative flex h-1.5 w-1.5">
+            ({{ store.totalItems }})
+            <span v-if="store.hasItems" class="relative flex h-1.5 w-1.5">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
             </span>
           </span>

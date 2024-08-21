@@ -1,18 +1,23 @@
 <script setup lang="ts">
 import {useCartStore} from "@/stores/cart";
 import type {Ref} from "vue";
-import {ShoppingCartIcon} from '@heroicons/vue/24/solid'
-import ContactsForm from "~/components/UI/Form/ContactsForm.vue";
-import PaymentForm from "~/components/UI/Form/PaymentForm.vue";
+import {ShoppingCartIcon, CheckBadgeIcon} from '@heroicons/vue/24/solid'
 import Spinner from "~/components/UI/Spinner.vue";
+import CartForm from "~/components/UI/Form/CartForm.vue";
 
 const store: Ref = ref(null)
 const loading = ref(true);
+const isSubmitted = ref(false);
 
 onMounted(() => {
   store.value = useCartStore()
   loading.value = false;
 })
+
+function isFromSubmitted() {
+  store.value.clearCart()
+  isSubmitted.value = true;
+}
 
 </script>
 
@@ -20,8 +25,11 @@ onMounted(() => {
   <div v-if="loading">
     <Spinner/>
   </div>
-  <div v-else-if="!store.hasItems" class="container mx-auto px-4 flex items-center justify-center mt-10 text-2xl">
+  <div v-else-if="!store.hasItems && !isSubmitted" class="container mx-auto px-4 flex items-center justify-center mt-10 text-2xl">
     <ShoppingCartIcon class="size-6 text-green-600"/>&nbsp;Ваша корзина пуста милорд...
+  </div>
+  <div v-else-if="isSubmitted" class="container mx-auto px-4 flex items-center justify-center mt-10 text-2xl">
+    <CheckBadgeIcon class="size-6 text-green-600"/>&nbsp;Ваша заявка отправлена милорд!
   </div>
   <div v-else>
     <div class="container mx-auto px-4">
@@ -33,7 +41,8 @@ onMounted(() => {
           <div class="mt-8">
             <div class="flow-root">
               <ul role="list" class="-my-6 divide-y divide-gray-200">
-                <cart-item v-for="product in store.cart" :product="product" :key="product.id" :remove-from-cart="store.removeFromCart"/>
+                <cart-item v-for="product in store.cart" :product="product" :key="product.id"
+                           :remove-from-cart="store.removeFromCart"/>
               </ul>
             </div>
           </div>
@@ -41,19 +50,13 @@ onMounted(() => {
 
         <div class="border-t border-gray-200 py-6">
 
-          <ContactsForm/>
-          <PaymentForm/>
-
-          <div class="flex justify-between text-base font-medium text-gray-900">
+          <div class="flex justify-between text-base font-medium text-gray-900 border-b border-gray-200 pb-6">
             <p>Всего:</p>
-            <p>{{ store.cartTotalPrice }}&nbsp;₽</p>
+            <p>{{ store.totalPrice }}&nbsp;₽</p>
           </div>
 
-          <p class="mt-0.5 text-sm text-gray-500">Доставка и налоги рассчитываются при оформлении заказа.</p>
-          <div class="mt-6">
-            <a href="#"
-               class="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700">Оплатить</a>
-          </div>
+          <CartForm @form-submitted="isFromSubmitted" :cart="store.cart" :total-price="store.totalPrice"/>
+
           <div class="mt-6 flex justify-center text-center text-sm text-gray-500">
             <p>или
               <NuxtLink to="/">

@@ -18,3 +18,7 @@ export function getLocalStorage<T>(key: string, defaultValue: T): T {
     const value = localStorage.getItem(key);
     return value ? JSON.parse(value) as T : defaultValue;
 }
+
+export function removeFromLocalStorage(key: string) {
+    localStorage.removeItem(key);
+}

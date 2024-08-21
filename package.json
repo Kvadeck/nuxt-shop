@@ -14,9 +14,12 @@
     "@heroicons/vue": "^2.1.5",
     "@nuxtjs/tailwindcss": "^6.12.1",
     "@pinia/nuxt": "^0.5.3",
+    "@vee-validate/nuxt": "^4.13.2",
+    "@vee-validate/yup": "^4.13.2",
     "nuxt": "^3.12.4",
     "pinia": "^2.2.2",
-    "vue": "latest"
+    "vue": "latest",
+    "yup": "^1.4.0"
   },
   "devDependencies": {
     "typescript": "^5.5.4"

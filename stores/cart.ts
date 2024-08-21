@@ -1,18 +1,14 @@
 import {defineStore} from 'pinia';
-import {getLocalStorage, setLocalStorage} from '~/utils';
+import {getLocalStorage, setLocalStorage, removeFromLocalStorage} from '~/utils';
 import type {Product} from "~/types/product.js";
 
 interface State {
     cart: Product[],
-    cartItemsCount: number,
-    cartTotalPrice: number
 }
 
 export const useCartStore = defineStore('cart', {
     state: (): State => ({
         cart: getLocalStorage('cart', []),
-        cartItemsCount: getLocalStorage('cartTotalItems', 0),
-        cartTotalPrice: getLocalStorage('cartTotalPrice', 0),
     }),
     getters: {
         hasItems: (state) => state.cart.length > 0,
@@ -22,8 +18,6 @@ export const useCartStore = defineStore('cart', {
     actions: {
         updateLocalStorage() {
             setLocalStorage('cart', this.cart);
-            setLocalStorage('cartTotalItems', this.totalItems);
-            setLocalStorage('cartTotalPrice', this.totalPrice);
         },
         addToCart(item: Product) {
             const existingItem: Product | undefined = this.cart.find((cartItem: Product) => cartItem.id === item.id);
@@ -38,5 +32,9 @@ export const useCartStore = defineStore('cart', {
             this.cart = this.cart.filter((item: Product) => item.id !== itemId);
             this.updateLocalStorage();
         },
+        clearCart() {
+            removeFromLocalStorage('cart')
+            this.cart = [];
+        }
     }
 });
