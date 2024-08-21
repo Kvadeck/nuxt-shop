@@ -4,8 +4,8 @@ import type {PaginationProps} from "~/types/pagination";
 const props = defineProps<PaginationProps>();
 
 const emit = defineEmits<{
-  (event: 'page-change', page: number): void;
-}>();
+  'page-change': [page: number]
+}>()
 
 function prevPage() {
   if (props.currentPage > 1) {

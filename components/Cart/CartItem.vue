@@ -1,12 +1,23 @@
 <script setup lang="ts">
+import type {Product} from "~/types/product";
 
-import type {CartItemProps} from "~/types/cart";
+export interface CartItemProps {
+  product: Product,
+  removeFromCart: Function
+}
+
 const props = defineProps<CartItemProps>();
+
+function removeFromCartConfirm(id: number) {
+  if (window.confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
+    props.removeFromCart(id)
+  }
+}
 
 </script>
 
 <template>
-  <li v-for="product in props.cart" :key="product.id" class="flex py-6">
+  <li class="flex py-6">
     <NuxtLink :to="`/products/${product.id}`">
       <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
         <img :src="product.imageSrc" :alt="product.imageAlt"
@@ -30,7 +41,7 @@ const props = defineProps<CartItemProps>();
         <p class="text-gray-500">Количество: <span class="font-semibold">{{ product.quantity }}</span></p>
 
         <div class="flex">
-          <button @click="props.removeFromCart(product.id)" type="button"
+          <button @click="removeFromCartConfirm(product.id)" type="button"
                   class="font-medium text-indigo-600 hover:text-indigo-500">Удалить
           </button>
         </div>

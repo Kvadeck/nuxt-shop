@@ -6,7 +6,7 @@ export function sortByProperty<T>(array: T[], property: keyof T): T[] {
         if (a[property] > b[property]) {
             return 1;
         }
-        return 0; // if equal
+        return 0;
     });
 }
 

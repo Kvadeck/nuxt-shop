@@ -1,12 +1,10 @@
 <script setup lang="ts">
 import {useProduct} from '~/composables/useProduct';
-import type {Product} from "~/types/product";
 import type {Ref} from "vue";
 import {useCartStore} from "@/stores/cart";
 
-const store: Ref = ref(() => {})
+const store: Ref = ref(null)
 
-// LocalStorage used only in onMounted hook
 onMounted(() => {
   store.value = useCartStore()
 })
@@ -15,18 +13,10 @@ const {product, error} = useProduct();
 const quantity: Ref = ref(1);
 
 function addProductToCart() {
-  const cartItem: Product = {
-    id: product.value.id,
-    name: product.value.name,
-    description: product.value.description,
-    color: product.value.color,
-    price: product.value.price,
-    imageSrc: product.value.imageSrc,
-    imageAlt: product.value.imageAlt,
-    smell: product.value.smell,
+  const cartItem = {
+    ...product.value,
     quantity: quantity.value,
-    thickness: product.value.thickness,
-  };
+  }
   store.value.addToCart(cartItem)
 }
 
@@ -36,7 +26,6 @@ function addProductToCart() {
   <div class="container mx-auto px-4">
     <div>
       <div v-if="product && Object.keys(product).length > 0">
-
         <div class="grid items-center lg:grid-cols-2 mt-6 mx-auto">
           <!-- Image -->
           <div class="overflow-hidden">
@@ -66,7 +55,9 @@ function addProductToCart() {
         </div>
       </div>
       <div v-else-if="error">Something goes wrong: {{ error }}</div>
+      <div v-else class="container mx-auto px-4 flex items-center justify-center mt-10 text-2xl">Такой продукт не
+        найден...
+      </div>
     </div>
   </div>
-
 </template>

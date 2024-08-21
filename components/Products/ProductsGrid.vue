@@ -43,7 +43,7 @@ function changePageHandler(page: number): void {
                       :name="product.name"
                       :image-src="product.imageSrc"
                       :image-alt="product.imageAlt" :smell="product.smell" :thickness="product.thickness"
-                      :description="product.description" :quantity="0"/>
+                      :description="product.description" :quantity="product.quantity"/>
       </div>
       <div v-else-if="error">Something goes wrong: {{ error }}</div>
       <div v-else class="text-center text-2xl">No trees found!</div>

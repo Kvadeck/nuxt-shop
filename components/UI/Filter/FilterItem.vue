@@ -1,8 +1,6 @@
 <script setup lang="ts">
-
 import type {FilterItemProps} from "~/types/filter";
 const props = defineProps<FilterItemProps>();
-
 </script>
 
 <template>
@@ -21,7 +19,3 @@ const props = defineProps<FilterItemProps>();
     </div>
   </label>
 </template>
-
-<style scoped>
-
-</style>

@@ -3,10 +3,10 @@ import {ref, computed} from 'vue';
 import FilterItem from "~/components/UI/Filter/FilterItem.vue";
 
 const emits = defineEmits<{
-  (e: 'change-filter', value: string): void;
-}>();
+  'change-filter': [value: string]
+}>()
 
-const isShowFilters = ref<boolean>(false);
+const isShowFilters = ref(false);
 
 const colorOptions = ['Желтовато-белый', 'Нежно-розовый', 'Бледно-коричневый',];
 const smellOptions = ['Чабрец', 'Лимон', 'Виноград', 'Грейпфрут'];
