@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { Product } from '~/types/product'
+import Confirm from '~/components/UI/Modal/Confirm.vue'
 
 export interface CartItemProps {
   product: Product
@@ -8,14 +9,25 @@ export interface CartItemProps {
 
 const props = defineProps<CartItemProps>()
 
-function removeFromCartConfirm(id: number) {
-  if (confirm('Вы уверены, что хотите удалить этот товар из корзины?')) {
-    props.removeFromCart(id)
+const isModalOpen = ref(false)
+
+function removeProductHandler(value: boolean) {
+  if (value) {
+    props.removeFromCart(props.product.id)
   }
+  isModalOpen.value = false
+}
+
+function showConfirmDialog() {
+  isModalOpen.value = true
+}
+function closeModal() {
+  isModalOpen.value = false
 }
 </script>
 
 <template>
+  <Confirm :is-opened="isModalOpen" @result="removeProductHandler" @close-modal="closeModal" />
   <li class="flex py-6">
     <NuxtLink :to="`/products/${product.id}`">
       <div class="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
@@ -47,7 +59,7 @@ function removeFromCartConfirm(id: number) {
         <div class="flex">
           <button
             type="button" class="font-medium text-indigo-600 hover:text-indigo-500"
-            @click="removeFromCartConfirm(product.id)"
+            @click="showConfirmDialog"
           >
             Удалить
           </button>
