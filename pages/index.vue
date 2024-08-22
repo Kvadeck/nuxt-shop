@@ -1,3 +1,3 @@
 <template>
-  <ProductsGrid/>
+  <ProductsGrid />
 </template>

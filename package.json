@@ -1,13 +1,15 @@
 {
   "name": "nuxt-app",
-  "private": true,
   "type": "module",
+  "private": true,
   "scripts": {
     "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "dependencies": {
     "@headlessui/vue": "^1.7.22",
@@ -22,6 +24,7 @@
     "yup": "^1.4.0"
   },
   "devDependencies": {
+    "@antfu/eslint-config": "^2.27.0",
     "typescript": "^5.5.4"
   }
 }
