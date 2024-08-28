@@ -1,6 +1,6 @@
 # Main page
-![Main](./main.png)
+![Main](./public/img/readme/main.png)
 # Product page
-![Main](./product.png)
+![Product](./public/img/readme/product.png)
 # Cart page
-![Main](./cart.png)
+![Cain](./public/img/readme/cart.png)

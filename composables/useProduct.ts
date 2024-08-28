@@ -20,7 +20,7 @@ export function useProduct() {
     }
   }
 
-  getProduct().then(() => {})
+  getProduct()
 
   return {
     product,
