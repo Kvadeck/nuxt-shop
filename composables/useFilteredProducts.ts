@@ -2,15 +2,15 @@ import type { Ref } from 'vue'
 import type { Product } from '~/types/product'
 import type { FilterOptions } from '~/types/filter'
 
-export function useFilteredProducts(products: Ref<Product[]>) {
+export function useFilteredProducts(products: Product[]) {
   const filters: Ref<FilterOptions> = ref({
     filterBy: [],
   })
 
   const filteredProducts = computed(() => {
-    return products.value.filter((product: Product) => {
+    return products.filter((product: Product) => {
       return (
-        filters.value.filterBy.length === 0
+        !filters.value.filterBy.length
         || filters.value.filterBy.includes(product.color)
         || filters.value.filterBy.includes(product.smell)
         || filters.value.filterBy.includes(product.thickness)

@@ -2,6 +2,7 @@
 import type { Ref } from 'vue'
 import { useProduct } from '~/composables/useProduct'
 import { useCartStore } from '@/stores/cart'
+import type { Product } from '~/types/product'
 
 const store: Ref = ref(null)
 
@@ -9,22 +10,28 @@ onMounted(() => {
   store.value = useCartStore()
 })
 
-const { product, error } = useProduct()
-const quantity: Ref = ref(1)
+const { product, error, getProduct } = useProduct()
+
+getProduct()
+
+const quantity = ref(1)
 
 function addProductToCart() {
-  const cartItem = {
-    ...product.value,
-    quantity: quantity.value,
+  if (product.value) {
+    product.value.quantity = quantity.value
+
+    const cartItem: Product = {
+      ...product.value,
+    }
+    store.value.addToCart(cartItem)
   }
-  store.value.addToCart(cartItem)
 }
 </script>
 
 <template>
   <div class="container mx-auto px-4">
     <div>
-      <div v-if="product && Object.keys(product).length > 0">
+      <div v-if="product">
         <div class="grid items-center lg:grid-cols-2 mt-6 mx-auto">
           <!-- Image -->
           <div class="overflow-hidden">
@@ -63,7 +70,8 @@ function addProductToCart() {
               </h3>
             </div>
             <button
-              type="button" class="bg-indigo-600 border border-transparent font-medium hover:bg-indigo-700 items-center justify-center mt-6 px-6 py-3 rounded-md text-base text-white"
+              type="button"
+              class="bg-indigo-600 border border-transparent font-medium hover:bg-indigo-700 items-center justify-center mt-6 px-6 py-3 rounded-md text-base text-white"
               @click.prevent="addProductToCart"
             >
               Добавить в корзину
@@ -75,8 +83,7 @@ function addProductToCart() {
         Something goes wrong: {{ error }}
       </div>
       <div v-else class="container mx-auto px-4 flex items-center justify-center mt-10 text-2xl">
-        Такой продукт не
-        найден...
+        Такой продукт не найден...
       </div>
     </div>
   </div>
