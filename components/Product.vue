@@ -12,7 +12,7 @@ onMounted(() => {
 
 const { product, error, getProduct } = useProduct()
 
-getProduct()
+await getProduct()
 
 const quantity = ref(1)
 

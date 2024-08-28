@@ -8,7 +8,7 @@ import { useWatchedPagination } from '~/composables/usePagination'
 import { useFilteredProducts } from '~/composables/useFilteredProducts'
 
 const { products, error, totalPages, currentPage } = useWatchedPagination()
-const { filteredProducts, updateFilter } = useFilteredProducts(products.value)
+const { filteredProducts, updateFilter } = useFilteredProducts(products)
 
 function sortByPriceDesc(): void {
   products.value = sortByProperty(products.value, 'price')

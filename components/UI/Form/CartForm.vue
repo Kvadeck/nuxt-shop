@@ -4,7 +4,7 @@ import type { CartFormProps } from '~/types/cart'
 
 const props = defineProps<CartFormProps>()
 const emits = defineEmits<{
-  formSubmitted: [value: undefined]
+  formSubmitted: [value: null]
 }>()
 
 const error = ref<string | null>(null)
