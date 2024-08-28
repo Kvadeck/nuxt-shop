@@ -18,7 +18,7 @@ export default defineEventHandler(async (event) => {
     return {
       status: 500,
       message: 'При добавление возникли ошибки...',
-      error: error.message,
+      error: error instanceof Error ? error.message : String(error),
     }
   }
 })
